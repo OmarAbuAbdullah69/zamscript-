@@ -1,34 +1,39 @@
 #pragma once
 
 
+#include <memory>
 namespace zms {
-  enum class vhgtype {
+  enum class value_type {
     INTGER = 0,
     FLOAT,
   };
-  class type {
+  class value {
     friend class vh;
     public:
-      type(const type &) {}
-      inline bool chick_same_type(const type & o) {
-        return (o.m_gtype == m_gtype) ? true : false;
-      } 
+      value(const value &) {}
+      inline bool chick_same_value(const value &o) {
+        return (o.m_vt == m_vt) ? true : false;
+      }
+      virtual ~value(){}
       
-    virtual vhgtype get_type() const = 0;
+    virtual value_type get_type() const = 0;
     protected:
-      type(){}
+      value(){}
     private:
-      virtual void copy(const type *) = 0;
-      vhgtype m_gtype;
+      virtual void copy(const value &) = 0;
+      value_type m_vt;
   };
   class vh {
     friend class unit;
     friend class core;
+    public:
+      ~vh();
+      vh(const vh &o);
     private:
-      vh(vhgtype vhg);
-      void set_value(type *t);
-      type &get_value();
-      type *m_type;
+      vh(value_type vhg);
+      void set_value(const value &v);
+      value &get_value();
+      std::shared_ptr<value> m_type;
       bool m_constant;
   };
 

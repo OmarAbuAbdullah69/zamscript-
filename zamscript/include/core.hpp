@@ -15,8 +15,8 @@ namespace zms {
   // add command for dev not the user
       void add_command(std::unique_ptr<command> cmd);
       void execute(unit_id u);
-      vh_id add_vh(vhgtype vhg, unit_id u=0);
-      type &get_value(vh_id vid);
+      vh_id add_vh(value_type vhg, unit_id u=0);
+      value &get_value(vh_id vid);
       void set_value();
     private:
       core();

@@ -1,30 +1,40 @@
 #include "valueholder/vh.hpp"
+#include <iostream>
+#include <memory>
 #include <stdexcept>
 
-#include "valueholder/intger.hpp"
+#include "valueholder/types.hpp"
 
 namespace zms {
-  vh::vh(vhgtype vhg) {
+  vh::vh(value_type vhg) {
     switch (vhg) {
-      case vhgtype::INTGER: {
-                              m_type = new INTGER();
+      case value_type::INTGER: {
+                              m_type = std::shared_ptr<value>(new INTGER);
                               break;
                             }
-      case vhgtype::FLOAT: {
-                              //m_type = new INTGER();  
+      case value_type::FLOAT: {
+                             //m_type = new INTGER();  
                               break;
                             }
     }
   }
-  void vh::set_value(type *t) {
-    if(m_type->get_type() == t->get_type()) {
-      m_type->copy(t);
+  vh::vh(const vh &o)
+    : m_type(o.m_type), m_constant(o.m_constant)
+  {
+  }
+
+  vh::~vh() {
+  }
+
+  void vh::set_value(const value &v) {
+    if(m_type->chick_same_value(v)) {
+      m_type->copy(v);
     } else {
       throw std::runtime_error("zms::lowlev: envaled conversion\n");
     }
   }
 
-  type &vh::get_value() {
+  value &vh::get_value() {
     return *m_type;
   }
 }

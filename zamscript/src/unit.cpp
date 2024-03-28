@@ -19,7 +19,7 @@ namespace zms {
       cmd->execute();
     }
   }
-  unsigned unit::add_vh(vh v) {
+  unsigned unit::add_vh(const vh &v) {
     m_vhs.push_back(v);
     return m_vhs.size()-1;
   }

@@ -13,7 +13,7 @@ namespace zms {
       unit(unit_id parent);
       void execute();
       void add_command(command *cmd);
-      unsigned add_vh(vh v);
+      unsigned add_vh(const vh &v);
 
       unit_id m_parent;
       std::vector<command *> m_commands;

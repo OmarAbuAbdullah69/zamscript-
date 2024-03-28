@@ -1,4 +1,5 @@
 #include "core.hpp"
+#include <iostream>
 #include <stdexcept>
 
 namespace zms {
@@ -17,14 +18,15 @@ namespace zms {
   void core::execute(unit_id u) {
     m_units[u-1].execute();
   }
-  vh_id core::add_vh(vhgtype vhg, unit_id u) {
+  vh_id core::add_vh(value_type vhg, unit_id u) {
+    vh v(vhg);
     if(!u) {
-      m_vhs.push_back(vh(vhg));
+      m_vhs.push_back(v);
       return vh_id(0, m_vhs.size()-1);
     }
-    return vh_id(u, m_units[u-1].add_vh(vh(vhg)));
+    return vh_id(u, m_units[u-1].add_vh(v));
   }
-  type &core::get_value(vh_id vid) {
+  value &core::get_value(vh_id vid) {
     if(!vid.m_points)
       throw std::runtime_error("zms::error::low: invalid access vh_id don't point at a vh");
     if(!vid.m_unit)
