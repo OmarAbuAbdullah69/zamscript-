@@ -1,6 +1,4 @@
 #include "valueholder/vh.hpp"
-#include <iostream>
-#include <memory>
 #include <stdexcept>
 
 #include "valueholder/types.hpp"
@@ -30,7 +28,7 @@ namespace zms {
     if(m_type->chick_same_value(v)) {
       m_type->copy(v);
     } else {
-      throw std::runtime_error("zms::lowlev: envaled conversion\n");
+      throw std::runtime_error("zms::lowlev: invalid conversion\n");
     }
   }
 

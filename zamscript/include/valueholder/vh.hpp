@@ -10,9 +10,8 @@ namespace zms {
   class value {
     friend class vh;
     public:
-      value(const value &) {}
       inline bool chick_same_value(const value &o) {
-        return (o.m_vt == m_vt) ? true : false;
+        return (get_type() == o.get_type());
       }
       virtual ~value(){}
       
@@ -21,7 +20,6 @@ namespace zms {
       value(){}
     private:
       virtual void copy(const value &) = 0;
-      value_type m_vt;
   };
   class vh {
     friend class unit;

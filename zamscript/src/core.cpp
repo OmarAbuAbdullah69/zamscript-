@@ -35,5 +35,13 @@ namespace zms {
     return m_units[vid.m_unit-1].m_vhs[vid.m_index].get_value();
 
   }
+  void core::set_value(vh_id vid, const value &v) {
+    if(!vid.m_unit) {
+      m_vhs[vid.m_index].set_value(v);
+      return;
+    }
+    m_units[vid.m_unit].m_vhs[vid.m_index].set_value(v);
+
+  }
 
 }

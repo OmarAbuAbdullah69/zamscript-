@@ -17,7 +17,7 @@ namespace zms {
       void execute(unit_id u);
       vh_id add_vh(value_type vhg, unit_id u=0);
       value &get_value(vh_id vid);
-      void set_value();
+      void set_value(vh_id vid, const value &v);
     private:
       core();
 

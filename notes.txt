@@ -1,0 +1,6 @@
+To do :
+
+1- fix the value type_chicking --done
+2- adding set_value --done
+3- adding refrence values
+

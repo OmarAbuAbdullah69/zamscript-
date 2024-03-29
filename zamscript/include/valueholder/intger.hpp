@@ -7,7 +7,7 @@ namespace zms {
   class INTGER: public value {
     friend int extract(INTGER);
     public:
-      INTGER(int value = 3)
+      INTGER(int value = 0)
         :m_value(value) {}
 
       virtual value_type get_type() const override{
