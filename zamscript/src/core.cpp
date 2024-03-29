@@ -1,5 +1,4 @@
 #include "core.hpp"
-#include <iostream>
 #include <stdexcept>
 
 namespace zms {
@@ -11,11 +10,9 @@ namespace zms {
     return m_units.size();
   }
 
-  // add command for dev not the user
-  void core::add_command(std::unique_ptr<command> cmd) {
-    m_units[cmd->m_parent-1].add_command(cmd.release());
-  }
   void core::execute(unit_id u) {
+    if (u >= m_units.size())
+      throw std::runtime_error("zms::error::low: attempting to execute none existing units");
     m_units[u-1].execute();
   }
   vh_id core::add_vh(value_type vhg, unit_id u) {
@@ -23,7 +20,8 @@ namespace zms {
     if(!u) {
       m_vhs.push_back(v);
       return vh_id(0, m_vhs.size()-1);
-    }
+    } else if(u >= m_units.size())
+      throw std::runtime_error("zms::error::low: attempting to execute none existing units");
     return vh_id(u, m_units[u-1].add_vh(v));
   }
   value &core::get_value(vh_id vid) {
@@ -36,6 +34,8 @@ namespace zms {
 
   }
   void core::set_value(vh_id vid, const value &v) {
+    if(!vid.m_points)
+      throw std::runtime_error("zms::error::low: invalid access vh_id don't point at a vh");
     if(!vid.m_unit) {
       m_vhs[vid.m_index].set_value(v);
       return;

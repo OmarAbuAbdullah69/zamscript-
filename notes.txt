@@ -1,7 +1,7 @@
 To do :
 
-1- fix the value type_chicking --done
-2- adding set_value --done
+1- fix the value type_chicking                   --done
+2- adding set_value                              --done
 3- adding refrence values
-4- add checking for invalid vh_ids and unit_ids
+4- add checking for invalid vh_ids and unit_ids  --done
 
