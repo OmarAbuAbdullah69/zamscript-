@@ -1,4 +1,5 @@
 #include "unit.hpp"
+#include <iostream>
 
 namespace zms {
   unit::unit(unit_id parent) 

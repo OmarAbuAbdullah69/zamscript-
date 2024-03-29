@@ -1,4 +1,6 @@
 #include "core.hpp"
+#include <iostream>
+#include <memory>
 #include <stdexcept>
 
 namespace zms {
@@ -9,9 +11,14 @@ namespace zms {
     m_units.push_back(unit(parent));
     return m_units.size();
   }
-
+  void core::add_command(std::unique_ptr<command> cmd) {
+    unit_id u = cmd->m_parent;
+    if(u == 0 || u > m_units.size())
+      throw std::runtime_error("zms::error::low: command couldn't be add, invalid unit_id");
+    m_units[u-1].add_command(cmd.release());  
+  }
   void core::execute(unit_id u) {
-    if (u >= m_units.size())
+    if (u > m_units.size())
       throw std::runtime_error("zms::error::low: attempting to execute none existing units");
     m_units[u-1].execute();
   }
@@ -20,7 +27,7 @@ namespace zms {
     if(!u) {
       m_vhs.push_back(v);
       return vh_id(0, m_vhs.size()-1);
-    } else if(u >= m_units.size())
+    } else if(u > m_units.size())
       throw std::runtime_error("zms::error::low: attempting to execute none existing units");
     return vh_id(u, m_units[u-1].add_vh(v));
   }
