@@ -1,5 +1,4 @@
 #include "core.hpp"
-#include <iostream>
 #include <memory>
 #include <stdexcept>
 
@@ -47,7 +46,7 @@ namespace zms {
       m_vhs[vid.m_index].set_value(v);
       return;
     }
-    m_units[vid.m_unit].m_vhs[vid.m_index].set_value(v);
+    m_units[vid.m_unit-1].m_vhs[vid.m_index].set_value(v);
 
   }
 

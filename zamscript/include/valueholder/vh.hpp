@@ -10,9 +10,6 @@ namespace zms {
   class value {
     friend class vh;
     public:
-      inline bool chick_same_value(const value &o) {
-        return (get_type() == o.get_type());
-      }
       virtual ~value(){}
       
     virtual value_type get_type() const = 0;

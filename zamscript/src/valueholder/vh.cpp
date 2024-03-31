@@ -1,6 +1,4 @@
 #include "valueholder/vh.hpp"
-#include <stdexcept>
-
 #include "valueholder/types.hpp"
 
 namespace zms {
@@ -25,11 +23,7 @@ namespace zms {
   }
 
   void vh::set_value(const value &v) {
-    if(m_type->chick_same_value(v)) {
-      m_type->copy(v);
-    } else {
-      throw std::runtime_error("zms::lowlev: invalid conversion\n");
-    }
+    m_type->copy(v);
   }
 
   value &vh::get_value() {

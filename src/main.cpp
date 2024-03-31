@@ -1,6 +1,5 @@
 #include "command/command.hpp"
 #include <iostream>
-#include <memory>
 #include <zamscript.hpp>
 
 
@@ -10,19 +9,27 @@ class sayhi : public command {
   public:
     sayhi(unit_id u)
       :command(u){}
+    ~sayhi() {
+    }
   private:
     void execute() override {
       std::cout << "hi\n";
     }
+
 };
 
 
 int main (int argc, char *argv[]) {
+  int i = 6;
   core &c = core::instance();
   unit_id uid = c.creat_unit();
-  vh_id vid = c.add_vh(value_type::INTGER);
-  c.add_command(std::make_unique<sayhi>(uid));
+//  c.add_command(std::make_unique<sayhi>(uid));
+  vh_id rid = c.add_vh(value_type::INTGER, uid);
+  c.set_value(rid, INTGER(&i));
+  c.set_value(rid, INTGER(3));
   c.execute(uid);
+
+ std::cout << i << std::endl;
 
   return 0;
 }
