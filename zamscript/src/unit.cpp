@@ -4,7 +4,7 @@
 namespace zms {
   unit::unit(unit_id parent) 
     :m_parent(parent){
-    std::cout << "unit_created\n";    
+    std::cout << "unit_created -> " << parent << std::endl;    
   }
   unit::~unit() {
     for(auto cmd : m_commands) {

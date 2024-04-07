@@ -20,7 +20,7 @@ namespace zms {
       vh_id add_vh(value_type vhg, unit_id u=0);
       value &get_value(vh_id vid);
       void set_value(vh_id vid, const value &v);
-      
+      // only user      
       void set_parser(parser_type p);
       inline void check_parser() {
         if(!m_parser)
@@ -29,6 +29,10 @@ namespace zms {
       void load(const char *script);
       unit_id find_unit(const char *unit_name);
 
+      // for library classes
+      inline unit_id get_unit_parent(unit_id uid) {
+        return m_units[uid-1].m_parent;
+      }
 
     private:
       core();
