@@ -1,6 +1,6 @@
 #include "core.hpp"
-#include <memory>
-#include <stdexcept>
+#include "parser/parser.hpp"
+#include "parser/text_parser.hpp"
 
 namespace zms {
   core::core() {
@@ -48,6 +48,18 @@ namespace zms {
     }
     m_units[vid.m_unit-1].m_vhs[vid.m_index].set_value(v);
 
+  }
+
+  void core::set_parser(parser_type p) {
+    switch (p) {
+      case parser_type::text: {
+                                m_parser = new text_parser;
+                              }
+    }
+  }
+  void core::load(const char *script) {
+    check_parser();
+    m_parser->parse(script);
   }
 
 }

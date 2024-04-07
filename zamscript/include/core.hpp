@@ -2,6 +2,7 @@
 
 #include "n.hpp"
 #include "unit.hpp"
+#include "parser/parser.hpp"
 #include <memory>
 #include <vector>
 
@@ -19,9 +20,19 @@ namespace zms {
       vh_id add_vh(value_type vhg, unit_id u=0);
       value &get_value(vh_id vid);
       void set_value(vh_id vid, const value &v);
+      
+      void set_parser(parser_type p);
+      inline void check_parser() {
+        if(!m_parser)
+          throw std::runtime_error("zms::error::low: no parser selceted\n");
+      }
+      void load(const char *script);
+      unit_id find_unit(const char *unit_name);
+
+
     private:
       core();
-
+      parser *m_parser;
       std::vector<unit> m_units;
       std::vector<vh> m_vhs;
 

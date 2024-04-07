@@ -1,9 +1,10 @@
 #include "unit.hpp"
+#include <iostream>
 
 namespace zms {
   unit::unit(unit_id parent) 
     :m_parent(parent){
-    
+    std::cout << "unit_created\n";    
   }
   unit::~unit() {
     for(auto cmd : m_commands) {
